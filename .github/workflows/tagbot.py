@@ -89,7 +89,7 @@ for condition, label in [(changed_ecs, 'change'), (new_software, 'new'), (update
     if condition and label not in current_labels:
        labels_add.append(label)
     elif not condition and label in current_labels:
-       labels_del.remove(label)
+       labels_del.append(label)
 
 url = f"{GITHUB_API_URL}/repos/{repo}/issues/{pr_number}/labels"
 
