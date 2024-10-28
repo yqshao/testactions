@@ -16,14 +16,19 @@ def get_first_commit_date(repo, file_path):
 
 
 def sort_by_added_date(repo, file_paths):
+    print("Compute first commit date")
     files_with_dates = [(get_first_commit_date(repo, file_path), file_path) for file_path in file_paths]
+    print("Sort them")
     sorted_files = sorted(files_with_dates)
+    print("Stripping out sorting info")
     return [file for file, date in sorted_files]
 
 
 def similar_easyconfigs(repo, new_file):
+    print("Checking for similar easyconfigs for {new_file}")
     d = os.path.dirname(new_file)
     possible_neighbours = [path for path in os.listdir(d) if path.endswith('.eb')]
+    print("Selecting top 3")
     return sort_by_added_date(repo, possible_neighbours)[:3] # top 3
 
 
