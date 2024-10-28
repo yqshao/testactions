@@ -39,8 +39,8 @@ def diff(old, new):
         return ''.join(difflib.unified_diff(
             old_lines,
             new_lines,
-            fromfile=old,
-            tofile=new))
+            fromfile=str(old),
+            tofile=str(new)))
         
 
 GITHUB_API_URL = 'https://api.github.com'
