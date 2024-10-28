@@ -81,13 +81,13 @@ for new_file in new_ecs:
     if neighbours:
         updated_software = True
         print(f"Diffs for {new_file}")
-        comment += '#### Updated software `{new_file}`\n\n'
+        comment += f'#### Updated software `{new_file}`\n\n'
 
         for neighbour in neighbours:
             print(f"against {neighbour}")
             comment += '<details>\n'
             comment += f'<summary>Diff against <code>{new_file}</code></summary>\n\n'
-            comment += f'[neighbour](https://github.com/{repo}/blob/{base_branch_name}/{neighbour})\n\n'
+            comment += f'[{neighbour}](https://github.com/{repo}/blob/{base_branch_name}/{neighbour})\n\n'
             comment += '```diff\n'
             comment += diff(neighbour, new_file)
             comment += '```\n</details>\n'
