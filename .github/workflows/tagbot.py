@@ -86,8 +86,8 @@ for new_file in new_ecs:
         for neighbour in neighbours:
             print(f"against {neighbour}")
             comment += '<details>\n'
-            comment += '<summary>Diff against <code>{new_file}</code></summary>\n\n'
-            comment += '[neighbour](https://github.com/{repo}/blob/{base_branch_name}/{neighbour})\n\n'
+            comment += f'<summary>Diff against <code>{new_file}</code></summary>\n\n'
+            comment += f'[neighbour](https://github.com/{repo}/blob/{base_branch_name}/{neighbour})\n\n'
             comment += '```diff\n'
             comment += diff(neighbour, new_file)
             comment += '```\n</details>\n'
