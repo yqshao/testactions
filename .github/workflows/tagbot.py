@@ -139,7 +139,7 @@ if updated_software:
     comment_id = None
     for existing_comment in response.json():
         if existing_comment["user"]["login"] == "github-actions[bot]":  # Bot username in GitHub Actions
-            comment_id = comment["id"]
+            comment_id = existing_comment["id"]
 
     if comment_id:
         # Update existing comment
