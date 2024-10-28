@@ -144,7 +144,7 @@ if updated_software:
     if comment_id:
         # Update existing comment
         url = f"{GITHUB_API_URL}/repos/{repo}/issues/comments/{comment_id}"
-        response = requests.patch(url, headers=headers, json={"body": comment})
+        response = requests.patch(url, headers=headers, json={"body": "todo"})
         if response.status_code == 200:
             print("Comment updated successfully.")
         else:
