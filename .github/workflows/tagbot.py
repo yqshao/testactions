@@ -75,6 +75,7 @@ for new_file in new_ecs:
     else:
         updated_software = True
     if neighbours:
+        print(f"Diff for neighbour {new_file} vs {file_path}")
         comment += '#### Updated software `{new_file}`\n\n'
 
         for neighbour in neighbours:
@@ -85,6 +86,7 @@ for new_file in new_ecs:
             comment += diff(neighbour, new_file)
             comment += '```\n</details>\n'
 
+print("Adjusting labels")
 # Adjust labeling
 current_labels = [label['name'] for label in data['pull_request']['labels']]
 
