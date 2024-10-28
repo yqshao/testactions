@@ -26,7 +26,7 @@ def sort_by_added_date(repo, file_paths):
 
 
 def similar_easyconfigs(repo, new_file):
-    possible_neighbours = Path(new_file).parent.glob('*.eb')
+    possible_neighbours = new_file.parent.glob('*.eb')
     print("Selecting top 3")
     return sort_by_added_date(repo, possible_neighbours)[:3] # top 3
 
@@ -66,8 +66,8 @@ base_branch = branches['origin/' + base_branch_name]
 pr_branch = branches['origin/' + pr_branch_name]
 
 pr_diff = base_branch.commit.diff(pr_branch.commit)
-new_ecs = [item.a_path for item in pr_diff if item.change_type == 'A' and item.a_path.endswith('.eb')]
-changed_ecs = [item.a_path for item in pr_diff if item.change_type != 'A' and item.a_path.endswith('.eb')]
+new_ecs = [Path(item.a_path) for item in pr_diff if item.change_type == 'A' and item.a_path.endswith('.eb')]
+changed_ecs = [Path(item.a_path) for item in pr_diff if item.change_type != 'A' and item.a_path.endswith('.eb')]
 
 print("Changed ECs:", changed_ecs)
 print("Newly added ECs:", new_ecs)
