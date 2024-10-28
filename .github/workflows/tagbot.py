@@ -13,22 +13,20 @@ def get_first_commit_date(repo, file_path):
     if commits:
         return commits[-1].committed_date
     else:
-        return datetime.datetime.min
+        print(f"{file_path} has no commit info, putting it last")
+        return datetime.datetime.min  # Shouldn't occur
 
 
 def sort_by_added_date(repo, file_paths):
-    print("Compute first commit date")
+    print("Compute first commit dates")
     files_with_dates = [(get_first_commit_date(repo, file_path), file_path) for file_path in file_paths]
-    print("Sort them")
     sorted_files = sorted(files_with_dates)
-    print("Stripping out sorting info")
     return [file for date, file in sorted_files]
 
 
 def similar_easyconfigs(repo, new_file):
-    possible_neighbours = new_file.parent.glob('*.eb')
-    print("Selecting top 3")
-    return sort_by_added_date(repo, possible_neighbours)[:3] # top 3
+    possible_neighbours = [x for x in new_file.parent.glob('*.eb') if x != new_file]
+    return sort_by_added_date(repo, possible_neighbours)[:3] # top 3 choices
 
 
 def diff(old, new):
