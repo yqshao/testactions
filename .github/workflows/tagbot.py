@@ -3,7 +3,8 @@ import git
 import requests
 import json
 import difflib
-import datetime
+from datetime import datetime
+from pathlib import Path
 
 
 def get_first_commit_date(repo, file_path):
@@ -25,9 +26,10 @@ def sort_by_added_date(repo, file_paths):
 
 
 def similar_easyconfigs(repo, new_file):
-    print("Checking for similar easyconfigs for {new_file}")
-    d = os.path.dirname(new_file)
-    possible_neighbours = [path for path in os.listdir(d) if path.endswith('.eb')]
+    possible_neighbours = Path(new_file).parent.glob('*.eb')
+    #print("Checking for similar easyconfigs for {new_file}")
+    #d = os.path.dirname(new_file)
+    #possible_neighbours = [os.path.join(d, path) for path in os.listdir(d) if path.endswith('.eb')]
     print("Selecting top 3")
     return sort_by_added_date(repo, possible_neighbours)[:3] # top 3
 
