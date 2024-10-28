@@ -64,7 +64,7 @@ new_software = False
 updated_software = False
 comment = ''
 for new_file in new_ecs:
-    neighbours = similar_easyconfigs(repo, new_file)
+    neighbours = similar_easyconfigs(gitrepo, new_file)
     if len(neighbours) == 0:
         new_software = True
     else:
