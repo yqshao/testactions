@@ -136,6 +136,7 @@ if updated_software:
     # Search for comment by bot to potentially replace
     url = f"{GITHUB_API_URL}/repos/{repo}/issues/{pr_number}/comments"
     response = requests.get(url, headers=headers)
+    comment_id = None
     for comment in response.json():
         if comment["user"]["login"] == "github-actions[bot]":  # Bot username in GitHub Actions
             comment_id = comment["id"]
