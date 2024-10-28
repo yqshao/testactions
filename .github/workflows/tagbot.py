@@ -27,9 +27,6 @@ def sort_by_added_date(repo, file_paths):
 
 def similar_easyconfigs(repo, new_file):
     possible_neighbours = Path(new_file).parent.glob('*.eb')
-    #print("Checking for similar easyconfigs for {new_file}")
-    #d = os.path.dirname(new_file)
-    #possible_neighbours = [os.path.join(d, path) for path in os.listdir(d) if path.endswith('.eb')]
     print("Selecting top 3")
     return sort_by_added_date(repo, possible_neighbours)[:3] # top 3
 
@@ -37,11 +34,13 @@ def similar_easyconfigs(repo, new_file):
 def diff(old, new):
     print(f"Diffing {old} vs {new}")
     with open(old, 'r') as old_file, open(new, 'r') as new_file:
-        return difflib.unified_diff(
+        old_lines = list(old_file)
+        new_lines = list(new_file)
+        return ''.join(difflib.unified_diff(
             old_file,
             new_file,
             fromfile=old,
-            tofile=new)
+            tofile=new))
         
 
 GITHUB_API_URL = 'https://api.github.com'
