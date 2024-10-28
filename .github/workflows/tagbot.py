@@ -75,6 +75,7 @@ updated_software = False
 comment = ''
 for new_file in new_ecs:
     neighbours = similar_easyconfigs(gitrepo, new_file)
+    print(f"Found {len(neighbours)} neighbours for {new_file}")
     if len(neighbours) == 0:
         new_software = True
     else:
