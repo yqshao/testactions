@@ -21,7 +21,7 @@ def sort_by_added_date(repo, file_paths):
     print("Sort them")
     sorted_files = sorted(files_with_dates)
     print("Stripping out sorting info")
-    return [file for file, date in sorted_files]
+    return [file for date, file in sorted_files]
 
 
 def similar_easyconfigs(repo, new_file):
