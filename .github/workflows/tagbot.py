@@ -76,11 +76,8 @@ comment = ''
 for new_file in new_ecs:
     neighbours = similar_easyconfigs(gitrepo, new_file)
     print(f"Found {len(neighbours)} neighbours for {new_file}")
-    if len(neighbours) == 0:
-        new_software = True
-    else:
-        updated_software = True
     if neighbours:
+        updated_software = True
         print(f"Diff for neighbour {new_file} vs {file_path}")
         comment += '#### Updated software `{new_file}`\n\n'
 
@@ -91,6 +88,9 @@ for new_file in new_ecs:
             comment += '```diff\n'
             comment += diff(neighbour, new_file)
             comment += '```\n</details>\n'
+    else:
+        new_software = True
+
 
 print("Adjusting labels")
 # Adjust labeling
