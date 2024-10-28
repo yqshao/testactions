@@ -74,7 +74,7 @@ for new_file in new_ecs:
         new_software = True
     else:
         updated_software = True
-    if neighbour:
+    if neighbours:
         comment += '#### Updated software `{new_file}`\n\n'
 
         for neighbour in neighbours:
