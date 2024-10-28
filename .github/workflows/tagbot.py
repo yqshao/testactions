@@ -78,7 +78,7 @@ for new_file in new_ecs:
     print(f"Found {len(neighbours)} neighbours for {new_file}")
     if neighbours:
         updated_software = True
-        print(f"Diff for neighbour {new_file} vs {file_path}")
+        print(f"Diffs for {new_file}")
         comment += '#### Updated software `{new_file}`\n\n'
 
         for neighbour in neighbours:
