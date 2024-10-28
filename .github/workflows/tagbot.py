@@ -6,6 +6,7 @@ import difflib
 
 
 def get_first_commit_date(repo, file_path):
+    print(f"Checking commit dates for {file_path}")
     commits = list(repo.iter_commits(paths=file_path))
     return commits[-1].committed_date
 
