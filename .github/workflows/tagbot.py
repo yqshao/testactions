@@ -3,12 +3,16 @@ import git
 import requests
 import json
 import difflib
+import datetime
 
 
 def get_first_commit_date(repo, file_path):
     print(f"Checking commit dates for {file_path}")
     commits = list(repo.iter_commits(paths=file_path))
-    return commits[-1].committed_date
+    if commits:
+        return commits[-1].committed_date
+    else:
+        return datetime.datetime.min
 
 
 def sort_by_added_date(repo, file_paths):
