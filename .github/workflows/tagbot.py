@@ -33,6 +33,7 @@ def similar_easyconfigs(repo, new_file):
 
 
 def diff(old, new):
+    print(f"Diffing {old} vs {new}")
     with open(old, 'r') as old_file, open(new, 'r') as new_file:
         return difflib.unified_diff(
             old_file,
@@ -82,6 +83,7 @@ for new_file in new_ecs:
         comment += '#### Updated software `{new_file}`\n\n'
 
         for neighbour in neighbours:
+            print(f"against {neighbour}")
             comment += '<details>\n'
             comment += '<summary>Diff against <code>{new_file}</code></summary>\n\n'
             comment += '[neighbour](https://github.com/{repo}/blob/{base_branch_name}/{neighbour})\n\n'
