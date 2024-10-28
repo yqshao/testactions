@@ -137,13 +137,12 @@ if updated_software:
     url = f"{GITHUB_API_URL}/repos/{repo}/issues/{pr_number}/comments"
     response = requests.get(url, headers=headers)
     comment_id = None
-    for comment in response.json():
-        if comment["user"]["login"] == "github-actions[bot]":  # Bot username in GitHub Actions
+    for existing_comment in response.json():
+        if existing_comment["user"]["login"] == "github-actions[bot]":  # Bot username in GitHub Actions
             comment_id = comment["id"]
 
     if comment_id:
         # Update existing comment
-        print(comment)
         url = f"{GITHUB_API_URL}/repos/{repo}/issues/comments/{comment_id}"
         response = requests.patch(url, headers=headers, json={"body": comment})
         if response.status_code == 200:
