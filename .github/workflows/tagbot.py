@@ -10,7 +10,7 @@ def get_first_commit_date(repo, file_path):
     return commits[-1].committed_date
 
 
-def sort_files_by_added_date(repo, file_paths):
+def sort_by_added_date(repo, file_paths):
     files_with_dates = [(get_first_commit_date(repo, file_path), file_path) for file_path in file_paths]
     sorted_files = sorted(files_with_dates)
     return [file for file, date in sorted_files]
