@@ -37,8 +37,8 @@ def diff(old, new):
         old_lines = list(old_file)
         new_lines = list(new_file)
         return ''.join(difflib.unified_diff(
-            old_file,
-            new_file,
+            old_lines,
+            new_lines,
             fromfile=old,
             tofile=new))
         
