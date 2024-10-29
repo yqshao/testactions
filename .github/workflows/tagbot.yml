@@ -9,9 +9,13 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
     - uses: actions/checkout@v4
+      ref: {{ github.ref }}
       with:
         fetch-depth: 0
       
+    - name: Fetch target branch
+      run: git fetch origin ${{ github.base_ref }}:${{ github.base_ref }}
+ 
     - name: set up Python
       uses: actions/setup-python@v5
       with:

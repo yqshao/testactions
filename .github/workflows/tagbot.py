@@ -46,7 +46,7 @@ event_path = os.getenv("GITHUB_EVENT_PATH")
 token = os.getenv("GH_TOKEN")
 repo = os.getenv("GITHUB_REPOSITORY")
 base_branch_name = os.getenv("GITHUB_BASE_REF")
-pr_branch_name = os.getenv("GITHUB_HEAD_REF")
+pr_branch_name = os.getenv("GITHUB_REF")
 print(os.environ)
 
 with open(event_path) as f:
