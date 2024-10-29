@@ -46,12 +46,13 @@ event_path = os.getenv("GITHUB_EVENT_PATH")
 token = os.getenv("GH_TOKEN")
 repo = os.getenv("GITHUB_REPOSITORY")
 base_branch_name = os.getenv("GITHUB_BASE_REF")
-pr_ref = os.getenv("GITHUB_REF")
+pr_ref_name = os.getenv("GITHUB_REF_NAME")
 print(os.environ)
 
 with open(event_path) as f:
     data = json.load(f)
 
+print(data)
 pr_number = data['pull_request']['number']
 
 print("PR number:", pr_number)
@@ -69,7 +70,7 @@ gitrepo = git.Repo(".")
 #pr_branch = refs['pulls/' + pr_ref_name]
 
 target_commit = gitrepo.commit('origin/' + base_branch_name)
-pr_commit = gitrepo.commit(pr_ref)
+pr_commit = gitrepo.commit('pull/' + pr_ref_name)
 pr_diff = target_commit.diff(pr_commit)
 #pr_diff = base_branch.commit.diff(pr_branch.commit)
 new_ecs = [Path(item.a_path) for item in pr_diff if item.change_type == 'A' and item.a_path.endswith('.eb')]
