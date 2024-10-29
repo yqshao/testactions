@@ -68,7 +68,7 @@ gitrepo = git.Repo(".")
 #base_branch = refs['origin/' + base_branch_name]
 #pr_branch = refs['pulls/' + pr_ref_name]
 
-target_commit = gitrepo.commit(base_branch_name)
+target_commit = gitrepo.commit('origin/' + base_branch_name)
 pr_commit = gitrepo.commit(pr_ref)
 pr_diff = target_commit.diff(pr_commit)
 #pr_diff = base_branch.commit.diff(pr_branch.commit)
