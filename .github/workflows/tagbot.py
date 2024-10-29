@@ -46,7 +46,7 @@ event_path = os.getenv("GITHUB_EVENT_PATH")
 token = os.getenv("GH_TOKEN")
 repo = os.getenv("GITHUB_REPOSITORY")
 base_branch_name = os.getenv("GITHUB_BASE_REF")
-pr_ref = os.getenv("GITHUB_REF")
+pr_ref_name = os.getenv("GITHUB_REF_NAME")
 print(os.environ)
 
 with open(event_path) as f:
@@ -65,8 +65,8 @@ refs = {x.name: x for x in gitrepo.refs}
 print("gitrepo.refs:", list(gitrepo.refs))
 print("refs names:", refs.keys())
 print("Branches:", branches.keys())
-base_branch = refs['refs/remotes/origin/' + base_branch_name]
-pr_branch = refs[pr_ref]
+base_branch = refs['origin/' + base_branch_name]
+pr_branch = refs['pulls/' + pr_ref_name]
 
 pr_diff = base_branch.commit.diff(pr_branch.commit)
 new_ecs = [Path(item.a_path) for item in pr_diff if item.change_type == 'A' and item.a_path.endswith('.eb')]
