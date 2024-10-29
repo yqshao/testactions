@@ -143,6 +143,7 @@ if updated_software:
     response = requests.get(url, headers=headers)
     comment_id = None
     for existing_comment in response.json():
+        print(existing_comment)
         if existing_comment["user"]["login"] == "github-actions[bot]":  # Bot username in GitHub Actions
             comment_id = existing_comment["id"]
 
