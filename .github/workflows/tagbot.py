@@ -61,10 +61,11 @@ print("PR ref:", pr_ref)
 
 gitrepo = git.Repo(".")
 branches = {x.name: x for x in gitrepo.remote().refs}
+refs = {x.name: x for x in gitrepo.refs}
 print("gitrepo.refs:", list(gitrepo.refs))
 print("Branches:", branches.keys())
-base_branch = branches['origin/' + base_branch_name]
-pr_branch = gitrepo.refs[pr_ref]
+base_branch = refs['refs/remotes/origin/' + base_branch_name]
+pr_branch = refs[pr_ref]
 
 pr_diff = base_branch.commit.diff(pr_branch.commit)
 new_ecs = [Path(item.a_path) for item in pr_diff if item.change_type == 'A' and item.a_path.endswith('.eb')]
