@@ -58,7 +58,7 @@ pr_number = data['pull_request']['number']
 print("PR number:", pr_number)
 print("Repo:", repo)
 print("Base branch name:", base_branch_name)
-print("PR ref:", pr_ref)
+print("PR ref:", pr_ref_name)
 
 gitrepo = git.Repo(".")
 #branches = {x.name: x for x in gitrepo.remote().refs}
