@@ -14,7 +14,7 @@ def get_first_commit_date(repo, file_path):
         return commits[-1].committed_date
     else:
         print(f"{file_path} has no commit info, putting it last")
-        return datetime.datetime.min  # Shouldn't occur
+        return datetime.datetime.min
 
 
 def sort_by_added_date(repo, file_paths):
@@ -26,7 +26,7 @@ def sort_by_added_date(repo, file_paths):
 
 def similar_easyconfigs(repo, new_file):
     possible_neighbours = [x for x in new_file.parent.glob('*.eb') if x != new_file]
-    return sort_by_added_date(repo, possible_neighbours)[:3] # top 3 choices
+    return sort_by_added_date(repo, possible_neighbours)[:3]  # top 3 choices
 
 
 def diff(old, new):
@@ -39,7 +39,7 @@ def diff(old, new):
             new_lines,
             fromfile=str(old),
             tofile=str(new)))
-        
+
 
 GITHUB_API_URL = 'https://api.github.com'
 event_path = os.getenv("GITHUB_EVENT_PATH")
@@ -51,7 +51,6 @@ print(os.environ)
 
 with open(event_path) as f:
     data = json.load(f)
-    #print(data)
 
 pr_number = data['pull_request']['number']
 
@@ -103,23 +102,22 @@ for new_file in new_ecs:
 
 
 print("Adjusting labels")
-# Adjust labeling
 current_labels = [label['name'] for label in data['pull_request']['labels']]
 
 labels_add = []
 labels_del = []
 for condition, label in [(changed_ecs, 'change'), (new_software, 'new'), (updated_software, 'update')]:
     if condition and label not in current_labels:
-       labels_add.append(label)
+        labels_add.append(label)
     elif not condition and label in current_labels:
-       labels_del.append(label)
+        labels_del.append(label)
 
 url = f"{GITHUB_API_URL}/repos/{repo}/issues/{pr_number}/labels"
 
 headers = {
     "Accept": "application/vnd.github+json",
     "Authorization": f"Bearer {token}",
-    "X-GitHub-Api-Version": f"2022-11-28",
+    "X-GitHub-Api-Version": "2022-11-28",
 }
 
 if labels_add:
@@ -164,5 +162,3 @@ if updated_software:
             print("Comment posted successfully.")
         else:
             print(f"Failed to post comment: {response.status_code}, {response.text}")
-
-
