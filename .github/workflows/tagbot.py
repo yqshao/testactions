@@ -51,8 +51,8 @@ print(os.environ)
 
 with open(event_path) as f:
     data = json.load(f)
+    #print(data)
 
-print(data)
 pr_number = data['pull_request']['number']
 
 print("PR number:", pr_number)
