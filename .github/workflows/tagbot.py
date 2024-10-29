@@ -63,6 +63,7 @@ gitrepo = git.Repo(".")
 branches = {x.name: x for x in gitrepo.remote().refs}
 refs = {x.name: x for x in gitrepo.refs}
 print("gitrepo.refs:", list(gitrepo.refs))
+print("refs names:", refs.keys())
 print("Branches:", branches.keys())
 base_branch = refs['refs/remotes/origin/' + base_branch_name]
 pr_branch = refs[pr_ref]
